@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c25ab5wwbogh2"]
+[gd_scene load_steps=5 format=3 uid="uid://c25ab5wwbogh2"]
 
 [ext_resource type="Texture2D" uid="uid://ca8s0k6io7ud3" path="res://icon.svg" id="1_57wy1"]
 [ext_resource type="Script" path="res://script/player.gd" id="1_pvw5x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jvqa"]
 size = Vector2(126, 126)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abpot"]
+radius = 30.1496
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_pvw5x")
@@ -14,3 +17,16 @@ texture = ExtResource("1_57wy1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1jvqa")
+
+[node name="hook" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hook"]
+position = Vector2(109, 0)
+shape = SubResource("CircleShape2D_abpot")
+
+[node name="Icon2" type="Sprite2D" parent="hook"]
+position = Vector2(109, 0)
+scale = Vector2(0.347656, 0.347656)
+texture = ExtResource("1_57wy1")
+
+[connection signal="body_entered" from="hook" to="." method="_on_hook_body_entered"]
